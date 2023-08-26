@@ -8,7 +8,14 @@ import SingleMovieDetails from '../SingleMovieDetails/SingleMovieDetails.jsx';
 function MovieDetails () {
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
+    const genres = useSelector(store => store.genres)
     const history = useHistory()
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_GENRES' });
+    }, []);
+
+    console.log(genres)
 
     const backHome = () => {
         history.push('/');
