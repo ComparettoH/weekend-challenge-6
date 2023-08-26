@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {HashRouter as Router, Route, Link} from 'react-router-dom';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import SingleMovieDetails from '../SingleMovieDetails/SingleMovieDetails.jsx';
 
 
 function MovieDetails () {
