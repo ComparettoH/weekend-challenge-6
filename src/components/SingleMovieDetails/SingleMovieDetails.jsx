@@ -8,7 +8,10 @@ function SingleMovieDetails () {
     const movies = useSelector(store => store.movies);
     
     return (
-        <h1>In Single Movie View</h1>
+        <div>
+        <h3>{movies.title}</h3>
+            <img src={movies.poster} alt={movies.title}/>
+        </div>
     )
 
 }

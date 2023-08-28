@@ -12,10 +12,14 @@ function MovieDetails () {
     const history = useHistory()
 
     useEffect(() => {
+        dispatch({ type: 'FETCH_MOVIES' });
+    }, []);
+
+    useEffect(() => {
         dispatch({ type: 'FETCH_GENRES' });
     }, []);
 
-    console.log(genres)
+    console.log('in movie detail and listing genres',genres)
 
     const backHome = () => {
         history.push('/');
@@ -25,14 +29,15 @@ function MovieDetails () {
         <main>
             <header>
             <button onClick={backHome}>Back to List</button>
-            <h1>In Movie Details!</h1>
+            <h1>In Movie Details List!</h1>
             </header>
             <section className="movies">
                 {movies.map(movie => {
                     return (
                         <div key={movie.id} >
-                            <h3>{movie.title}</h3>
                             <img src={movie.poster} alt={movie.title}/>
+                            <h3>{movie.title}</h3>
+                            <p>{movie.description}</p>
                         </div>
                     );
                 })}

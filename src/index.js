@@ -31,6 +31,17 @@ function* fetchAllMovies() {
         
 }
 
+function* fetchSingleMovie (action){
+    //get single movie and info from DB
+    try{
+        const movieResponse = yield axios.get(`/api/movie/details/${action.payload}`)
+        console.log('in fetch', movieResponse)
+        yield put({ type: 'SET_MOVIE', payload: movieResponse.data})
+    } catch (error) {
+        console.log('Error fetching ')
+    }
+}
+
 function* fetchMovieGenre (){
     //get all movie AND Genre info from the DB
     try {
