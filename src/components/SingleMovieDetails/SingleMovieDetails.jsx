@@ -1,3 +1,4 @@
+import { on } from 'nodemon';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {HashRouter as Router, Route, Link} from 'react-router-dom';
@@ -5,12 +6,18 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function SingleMovieDetails () {
     const dispatch = useDispatch();
-    const movies = useSelector(store => store.movies);
+    const oneMovie = useSelector(store => store.oneMovie);
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_MOVIE'})
+    }, [])
     
     return (
         <div>
-        <h3>{movies.title}</h3>
-            <img src={movies.poster} alt={movies.title}/>
+            <h1>Movie Details</h1>
+            <img src={oneMovie.poster} alt={oneMovie.title}/>
+            <h3>{oneMovie.title}</h3>
+            <p>{oneMovie.description}</p>
         </div>
     )
 

@@ -16,6 +16,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('FETCH_GENRES',
     fetchMovieGenre);
+    yield takeEvery('SET_MOVIE', fetchSingleMovie)
 }
 
 function* fetchAllMovies() {
@@ -36,7 +37,7 @@ function* fetchSingleMovie (action){
     try{
         const movieResponse = yield axios.get(`/api/movie/details/${action.payload}`)
         console.log('in fetch', movieResponse)
-        yield put({ type: 'SET_MOVIE', payload: movieResponse.data})
+        yield put({ type: 'SET_MOVIE'})
     } catch (error) {
         console.log('Error fetching ')
     }
@@ -65,6 +66,15 @@ const movies = (state = [], action) => {
     }
 }
 
+//Used to store singular movie returned from the server
+const oneMovie = (state = [], action) => { switch(action.type){
+    case 'SET_MOVIE':
+        return action.payload;
+        default:
+            return state;
+}
+}
+
 // Used to store the movie genres
 const genres = (state = [], action) => {
     switch (action.type) {
@@ -80,6 +90,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        oneMovie,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
